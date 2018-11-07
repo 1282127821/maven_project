@@ -44,6 +44,8 @@ public class StrongRefenceTest {
          System.gc();//关键，这个是立刻触发gc操作，因为 垃圾回收器 是不定时运行，所以手动触发gc
 
       weakHashMap.keySet().forEach(System.out::println);// 不gc()的话，还能访问对象，否则null。
-
+System.out.println("branches");
+System.out.println("branches");
+System.out.println("master");
     }
 }
