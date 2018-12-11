@@ -3,7 +3,6 @@ package com.xy.NIO.version1;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
-import java.net.UnknownHostException;
 import java.nio.ByteBuffer;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
@@ -18,9 +17,9 @@ import java.util.LinkedList;
  * @date:2018/12/9
  * @description:
  */
-public class EchoClient {
+public class EchoClient2 {
   public static void main(String[] args) throws IOException {
-    EchoClient echoClient = new EchoClient();
+    EchoClient2 echoClient = new EchoClient2();
     InetAddress localHost = InetAddress.getLocalHost();
     echoClient.init("192.168.130.1", 9999);
     echoClient.working();
@@ -29,7 +28,7 @@ public class EchoClient {
   private LinkedList<ByteBuffer> outq;
   private Selector selector;
 
-  public EchoClient() {
+  public EchoClient2() {
     this.outq = new LinkedList<>();
   }
 
@@ -74,11 +73,11 @@ public class EchoClient {
       channel.finishConnect();
     }
     channel.configureBlocking(false);
-    try {
-      Thread.sleep(10000);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
+//    try {
+//      Thread.sleep(10000);
+//    } catch (InterruptedException e) {
+//      e.printStackTrace();
+//    }
     channel.write(ByteBuffer.wrap(new String("hello server!\r\n").getBytes()));
     channel.register(this.selector, SelectionKey.OP_READ);
   }

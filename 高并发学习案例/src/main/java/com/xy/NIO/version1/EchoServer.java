@@ -43,10 +43,14 @@ public class EchoServer {
     SelectionKey selectionKey =
         ssc.register(selector, SelectionKey.OP_ACCEPT);
     long e = 0;
-      System.out.println(ssc);
     for (; ; ) {
-      selector.select(); // 阻塞,必须有客户端连接才会继续往下运行
-      Set<SelectionKey> readyKeys =
+        int select = selector.select();// 阻塞,必须有客户端连接才会继续往下运行
+        System.out.println(select+"？？？？？");
+//        if (select==1){
+//            System.out.println(select+"？？？？？");
+//            return;
+//        }
+        Set<SelectionKey> readyKeys =
           selector.selectedKeys(); // 多线程情况下，可能多个先都调用select()然后selectedKeys()
       Iterator<SelectionKey> iterator = readyKeys.iterator();
 //      System.out.println(readyKeys.size()+">>>>>>>证明在做死循环>>>>>>>>>>>>>");
@@ -80,7 +84,7 @@ public class EchoServer {
       try {
           int len = channel.write(bb);
           if (len==-1){
-//              disconnect(sk);
+              disconnect(sk);
               return;
           }
           if (bb.remaining()==0){
@@ -105,13 +109,13 @@ public class EchoServer {
     try {
       len = channel.read(bb);
       if (len < 0) {
-//        disconnect(sk);
+        disconnect(sk);
         return;
       }
     } catch (IOException e) {
       System.out.println("失败");
       e.printStackTrace();
-//      disconnect(sk);
+      disconnect(sk);
       return;
     }
     bb.flip();
@@ -121,7 +125,16 @@ public class EchoServer {
     executorService.execute(new HandleMsg(sk,bb));
   }
 
-  private void doAccpet(SelectionKey sk) {
+    private void disconnect(SelectionKey sk) {
+      sk.cancel();
+        try {
+            sk.channel().close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void doAccpet(SelectionKey sk) {
     ServerSocketChannel server = (ServerSocketChannel) sk.channel();
     SocketChannel clientChannel;
     try {
