@@ -21,7 +21,7 @@ public class EchoClient2 {
   public static void main(String[] args) throws IOException {
     EchoClient2 echoClient = new EchoClient2();
     InetAddress localHost = InetAddress.getLocalHost();
-    echoClient.init("192.168.130.1", 9999);
+    echoClient.init(localHost.getHostAddress(), 9999);
     echoClient.working();
   }
 
@@ -62,24 +62,29 @@ public class EchoClient2 {
           connect(key);
         } else if (key.isReadable()) {
           read(key);
+        }else if (key.isWritable()){
+          write(key);
         }
       }
     }
   }
-
+  private void write(SelectionKey key) throws IOException {
+    SocketChannel channel = (SocketChannel) key.channel();
+//        try {
+//            Thread.sleep(10000);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+    channel.write(ByteBuffer.wrap(new String("hello server!\r\n").getBytes()));
+    channel.register(this.selector, SelectionKey.OP_READ);
+  }
   public void connect(SelectionKey key) throws IOException {
     SocketChannel channel = (SocketChannel) key.channel();
     if (channel.isConnectionPending()) {
       channel.finishConnect();
     }
     channel.configureBlocking(false);
-//    try {
-//      Thread.sleep(10000);
-//    } catch (InterruptedException e) {
-//      e.printStackTrace();
-//    }
-    channel.write(ByteBuffer.wrap(new String("hello server!\r\n").getBytes()));
-    channel.register(this.selector, SelectionKey.OP_READ);
+    channel.register(this.selector, SelectionKey.OP_WRITE);
   }
 
   public void read(SelectionKey key) throws IOException {
