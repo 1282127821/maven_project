@@ -30,7 +30,7 @@
       <option name="IGNORE_JAVADOC_PERIOD" value="true" />
       <option name="IGNORE_DUPLICATED_THROWS" value="false" />
       <option name="IGNORE_POINT_TO_ITSELF" value="false" />
-      <option name="myAdditionalJavadocTags" value="date,description:,author:xy,fileName:Consumer,date:2018/11/24,fileName:Productor,fileName:Event,fileName:EventFactory,description:future本质,date:2018/12/2,fileName:FutureDemo" />
+      <option name="myAdditionalJavadocTags" value="date,description:,author:xy,fileName:Consumer,date:2018/11/24,fileName:Productor,fileName:Event,fileName:EventFactory,description:future本质,date:2018/12/2,fileName:FutureDemo,date:2018/12/9,fileName:EchoClient,fileName:EchoServer" />
     </inspection_tool>
   </profile>
 </component>

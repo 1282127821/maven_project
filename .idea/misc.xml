@@ -9,6 +9,9 @@
         <option value="$USER_HOME$/Desktop/game-hot-update-master/GameServer/pom.xml" />
         <option value="$USER_HOME$/Desktop/game-hot-update-master/pom.xml" />
         <option value="$PROJECT_DIR$/../springboot3/pom.xml" />
+        <option value="$PROJECT_DIR$/../spring-integration/integration/pom.xml" />
+        <option value="$PROJECT_DIR$/../spring-integration/integration_javaconfig/pom.xml" />
+        <option value="$PROJECT_DIR$/../other/pom.xml" />
       </list>
     </option>
   </component>

@@ -9,11 +9,14 @@
         <module name="four" />
         <module name="GameServer" />
         <module name="GameServerHotUpdate" />
+        <module name="integration" />
+        <module name="integration_javaconfig" />
         <module name="LoadAgent" />
         <module name="lombok-study" />
         <module name="spiImpl" />
         <module name="spiRule" />
         <module name="spiTest" />
+        <module name="springboot" />
         <module name="springboot-demo" />
         <module name="springboot3" />
         <module name="three" />
